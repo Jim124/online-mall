@@ -1,0 +1,8 @@
+server:http://202.75.51.63:6262/
+password:--82$&3W3bRqlw
+
+mysql:server=202.75.51.63
+mysql:port=3306
+mysql:user=mallUser
+mysql:password=livestream:ma6oH
+mysql:database=mall

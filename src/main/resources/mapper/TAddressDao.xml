@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mindark.onlinemall.dao.TAddressDao">
+    <resultMap id="TAddressResult" type="com.mindark.onlinemall.domain.TAddress" >
+        <id column="address_id" property="addressId" jdbcType="INTEGER" />
+        <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+        <result column="state_id" property="stateId" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="phone_no" property="phoneNo" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="zip_code" property="zipCode" jdbcType="VARCHAR" />
+        <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+        <result column="is_default" property="isDefault" jdbcType="BOOLEAN" />
+        <result property="createdTime"    column="created_time"  jdbcType="TIMESTAMP"  />
+        <result property="updatedTime"    column="updated_time"  jdbcType="TIMESTAMP"  />
+    </resultMap>
+    <sql id="selectTCustomerVo">
+        select name, phone_no, address,zip_code,city_name,is_default from t_address
+    </sql>
+
+    <select id="selectTAddressById" parameterType="com.mindark.onlinemall.domain.TAddress" resultType="com.mindark.onlinemall.vo.TAddressVo">
+        <include refid="selectTCustomerVo"/>
+            where address_id = #{addressId}
+    </select>
+
+    <update id="updateAddressByAddressId" parameterType="TAddress">
+        update t_address
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stateId != null ">state_id = #{stateId},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="phoneNo != null and phoneNo != ''">phone_no = #{phoneNo},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="zipCode != null and zipCode != ''">zip_code = #{zipCode},</if>
+            <if test="cityName != null and cityName != ''">city_name = #{cityName},</if>
+            <if test="isDefault != null">is_default = #{isDefault},</if>
+            <if test="updatedTime != null">updated_time = #{updatedTime},</if>
+        </trim>
+        where address_id = #{addressId}
+    </update>
+
+
+
+
+
+
+</mapper>
